@@ -1,5 +1,3 @@
-# TSOHA-projekti
-
 **Reseptihakusovellus**
 
 Sovelluksen käyttäjät voivat lisätä reseptejä ja arvostella muiden reseptejä.
