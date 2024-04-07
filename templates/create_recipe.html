@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<title>Uusi resepti</title>
+
+<h2>Luo resepti</h2>
+<form action="/create_recipe" method="post">
+
+<p>Anna reseptille nimi:</p>
+<input type="text" name="name">
+<p>Annosten määrä:</p>
+<input type="text" name="servings">
+<p>Lisää reseptille kategoria(t):</p>
+<input type="checkbox" name="category" value="helppo"> helppo
+<input type="checkbox" name="category" value="keskitaso"> keskitaso
+<input type="checkbox" name="category" value="haastava"> haastava <br>
+<input type="checkbox" name="category" value="suolaiset"> suolaiset
+<input type="checkbox" name="category" value="makeat"> makeat <br>
+<input type="checkbox" name="category" value="gluteeniton"> gluteeniton
+<input type="checkbox" name="category" value="vegaaninen"> vegaaninen
+
+<p>Ainesosat:</p>
+<textarea name="ingredients" rows="20" cols="50"></textarea>
+<p>Työvaiheet:</p>
+<textarea name="instructions" rows="20" cols="50"></textarea>
+<br>
+<input type="submit" value="Luo resepti">
+
+</form>
+
+</body>
+</html>
