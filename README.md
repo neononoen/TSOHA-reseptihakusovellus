@@ -11,3 +11,11 @@ Sovelluksen ominaisuudet:
 - Reseptejä voi hakea eri kategorioista.
 - Käyttäjä voi muokata tai poistaa oman reseptinsä tai kommenttinsa.
 - Käyttäjä voi lisätä reseptin suosikkeihin.
+
+Nykytilanne:
+
+- Käyttäjä voi kirjautua sisään ja ulos ja luoda tunnuksen
+- Käyttäjä voi lisätä reseptin ja antaa sille kategoriat
+- Käyttäjä voi avata oman profiilisivun
+- Suosikkien lisääminen, kommentointi tai reseptien haku ei onnistu vielä
+- Reseptisivu ei vielä näytä itse reseptiä
