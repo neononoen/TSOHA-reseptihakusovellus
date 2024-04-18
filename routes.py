@@ -86,7 +86,13 @@ def create_recipe():
         
         return redirect("/recipe/"+str(recipe_id))
     
-@app.route("/recipe/<int:recipe_id>")
+@app.route("/recipe/<int:recipe_id>", methods=["get"])
 def recipe(recipe_id):
+    if request.method == "GET":
+        recipe = recipes.recipe(recipe_id)
+        name = recipe[0]
+        servings = recipe[1]
+        ingredients = recipe[2]
+        instructions = recipe[3]
 
-    return render_template("recipe.html")
+        return render_template("recipe.html", name=name, servings=servings, ingredients=ingredients, instructions=instructions)

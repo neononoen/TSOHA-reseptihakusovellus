@@ -33,3 +33,15 @@ def user_recipes(creator_id):
       recipes = result.fetchall()
 
       return recipes
+
+def recipe(recipe_id):
+
+      sql = text("SELECT name, servings, ingredients, instructions FROM recipes WHERE id=:id")
+
+      result = db.session.execute(sql, {"id":recipe_id})
+
+      recipe = result.fetchone()
+
+      return recipe
+
+
