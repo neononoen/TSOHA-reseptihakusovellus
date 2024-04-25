@@ -36,12 +36,19 @@ def user_recipes(creator_id):
 
 def recipe(recipe_id):
 
-      sql = text("SELECT name, servings, ingredients, instructions FROM recipes WHERE id=:id")
+      sql = text("SELECT name, servings, ingredients, instructions, creator_id FROM recipes WHERE id=:id")
 
       result = db.session.execute(sql, {"id":recipe_id})
 
       recipe = result.fetchone()
 
       return recipe
+
+def remove_recipe(recipe_id):
+      
+      sql = text("UPDATE recipes SET visible=FALSE WHERE id=:id")
+      db.session.execute(sql, {"id":recipe_id})
+      db.session.commit()
+
 
 

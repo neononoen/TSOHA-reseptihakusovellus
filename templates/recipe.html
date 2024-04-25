@@ -4,6 +4,12 @@
 
 <title>{{ name }}</title>
 
+{% if session.user_id == creator_id %}
+<form action="/recipe/{{ id }}"  method="post">
+<input type="submit" value="Poista resepti">
+</form>
+{% endif %}
+
 <h2>{{ name }}</h2>
 
 <h3>Annoksia</h3>

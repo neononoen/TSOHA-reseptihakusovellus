@@ -86,13 +86,23 @@ def create_recipe():
         
         return redirect("/recipe/"+str(recipe_id))
     
-@app.route("/recipe/<int:recipe_id>", methods=["get"])
+@app.route("/recipe/<int:recipe_id>", methods=["get", "post"])
 def recipe(recipe_id):
+
+    id = recipe_id
     if request.method == "GET":
         recipe = recipes.recipe(recipe_id)
         name = recipe[0]
         servings = recipe[1]
         ingredients = recipe[2]
         instructions = recipe[3]
+        creator_id = recipe[4]
 
-        return render_template("recipe.html", name=name, servings=servings, ingredients=ingredients, instructions=instructions)
+        return render_template("recipe.html", name=name, servings=servings, ingredients=ingredients, instructions=instructions, creator_id=creator_id, id=id)
+
+    if request.method == "POST":
+        recipes.remove_recipe(recipe_id)
+
+        return redirect("/profile")
+        
+    
