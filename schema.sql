@@ -11,7 +11,7 @@ CREATE TABLE recipes (
     servings INTEGER,
     ingredients TEXT,
     instructions TEXT,
-    visible BOOLEAN
+    visible BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE categories (
@@ -28,7 +28,7 @@ CREATE TABLE recipe_categories (
 CREATE TABLE favourites (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(id),
-    visible BOOLEAN
+    visible BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE  ratings (
@@ -42,8 +42,19 @@ CREATE TABLE  comments (
     id SERIAL PRIMARY KEY,
     comment TEXT,
     user_id INTEGER REFERENCES users(id),
-    visible BOOLEAN
+    visible BOOLEAN DEFAULT TRUE
 );
 
+INSERT INTO categories (category) VALUES ('helppo');
 
+INSERT INTO categories (category) VALUES ('keskitaso');
 
+INSERT INTO categories (category) VALUES ('haastava');
+
+INSERT INTO categories (category) VALUES ('suolaiset');
+
+INSERT INTO categories (category) VALUES ('makeat');
+
+INSERT INTO categories (category) VALUES ('gluteeniton');
+
+INSERT INTO categories (category) VALUES ('vegaaninen');
