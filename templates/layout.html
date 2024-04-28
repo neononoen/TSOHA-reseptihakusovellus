@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<title>{% block title %}{% endblock %}</title>
+<h1>Reseptiholvi</h1>
+<hr>
+{% if session.user_id %}
+<a href="/">Etusivu</a> 
+<a href="/profile">Profiili</a>
+<a href="/logout">Kirjaudu ulos</a>
+{% else %}
+<a href="/login">Kirjaudu sisään</a> tai <a href="/register">luo uusi tunnus</a>
+{% endif %}
+<hr>
+{% block content %}{% endblock %}

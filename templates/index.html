@@ -1,34 +1,16 @@
 <!DOCTYPE html>
 <html>
 <body>
+{% extends "layout.html" %}
+{% block title %}Etusivu{% endblock %}
+{% block content %}
 
-<title>Reseptiholvi</title>
-
-<h1>Tervetuloa Reseptiholviin!</h1>
-<hr>                
-{% if session.user_id %}
-<a href="/">Etusivu</a> 
-<a href="/profile">Profiili</a>
-<a href="/logout">Kirjaudu ulos</a>
-{% else %}
-<a href="/login">Kirjaudu sisään</a> tai <a href="/register">luo uusi tunnus</a>
-{% endif %}
-<hr>
-
-<form action="/results" method="post">
+<form action="/results" method="get">
 <p>Hae reseptejä:</p>
-<input type="text" name="search"> 
-<br>
-<input type="checkbox" name="category" value="A"> helppo
-<input type="checkbox" name="category" value="B"> keskitaso
-<input type="checkbox" name="category" value="C"> haastava <br>
-<input type="checkbox" name="category" value="D"> suolaiset
-<input type="checkbox" name="category" value="E"> makeat <br>
-<input type="checkbox" name="category" value="F"> gluteeniton
-<input type="checkbox" name="category" value="G"> vegaaninen
-<br>
+<input type="text" name="search">
 <input type="submit" value="Hae">
 </form>
 
+{% endblock %}
 </body>
 </html>
