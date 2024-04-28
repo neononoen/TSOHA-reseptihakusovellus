@@ -8,7 +8,7 @@ CREATE TABLE recipes (
     id SERIAL PRIMARY KEY,
     name TEXT,
     creator_id INTEGER REFERENCES users(id),
-    servings INTEGER,
+    servings TEXT,
     ingredients TEXT,
     instructions TEXT,
     visible BOOLEAN DEFAULT TRUE
