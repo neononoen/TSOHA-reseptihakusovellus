@@ -50,5 +50,15 @@ def remove_recipe(recipe_id):
       db.session.execute(sql, {"id":recipe_id})
       db.session.commit()
 
+def search_recipes(search):
+
+      sql = text("SELECT id, name FROM recipes WHERE visible=:visible AND name ILIKE :search")
+
+      result = db.session.execute(sql, {"visible":True, "search":"%"+search+"%"})
+
+      results = result.fetchall()
+
+      return results
+
 
 

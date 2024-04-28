@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html>
 <body>
-
+{% extends "layout.html" %}
+{% block title %}Hakutulokset{% endblock %}
+{% block content %}
+<h2>Hakutulokset:</h2>
+{% if not results %}
+Ei tuloksia
+{% else %}
+{% for result in results %}
+<hr>
+<a href="/recipe/{{ result.id }}">{{ result.name }}</a>
+{% endfor %}
+<hr>
+{% endif %}
+<br>
+<a href="/">Palaa etusivulle</a> 
+{% endblock %}
 </body>
 </html>

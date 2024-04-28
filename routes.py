@@ -8,6 +8,13 @@ def index():
 
     return render_template("index.html")
 
+@app.route("/results")
+def results():
+
+    search = request.args["search"]
+
+    return render_template("results.html", results=recipes.search_recipes(search))
+
 @app.route("/login", methods=["get", "post"])
 def login():
     
@@ -54,13 +61,16 @@ def logout():
 @app.route("/profile", methods=["get"])
 def profile():
 
-    creator_id = users.user_id()
-
-    if request.method == "GET":
-        return render_template("profile.html", recipes=recipes.user_recipes(creator_id))
+    if not users.user_id():
+        return redirect("/login")
+    
+    return render_template("profile.html", recipes=recipes.user_recipes(users.user_id()))
 
 @app.route("/create_recipe", methods=["get", "post"])
 def create_recipe():
+
+    if not users.user_id():
+        return redirect("/login")
     
     if request.method == "GET":
         return render_template("create_recipe.html")
