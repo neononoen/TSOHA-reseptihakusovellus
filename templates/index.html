@@ -5,15 +5,15 @@
 <title>Reseptiholvi</title>
 
 <h1>Tervetuloa Reseptiholviin!</h1>
-<hr>                 
-
+<hr>                
 {% if session.user_id %}
-Olet kirjautunut sisään nimellä <b>{{ session.user_name }}</b>. <a href="/logout">Kirjaudu ulos</a>
+<a href="/">Etusivu</a> 
 <a href="/profile">Profiili</a>
+<a href="/logout">Kirjaudu ulos</a>
 {% else %}
 <a href="/login">Kirjaudu sisään</a> tai <a href="/register">luo uusi tunnus</a>
 {% endif %}
-
+<hr>
 
 <form action="/results" method="post">
 <p>Hae reseptejä:</p>

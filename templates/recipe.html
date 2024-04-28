@@ -4,6 +4,12 @@
 
 <title>{{ name }}</title>
 
+<hr>
+<a href="/">Etusivu</a> 
+<a href="/profile">Profiili</a>
+<a href="/logout">Kirjaudu ulos</a>
+<hr>
+
 {% if session.user_id == creator_id %}
 <form action="/recipe/{{ id }}"  method="post">
 <input type="submit" value="Poista resepti">
