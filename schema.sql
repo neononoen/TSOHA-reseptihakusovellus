@@ -28,7 +28,7 @@ CREATE TABLE recipe_categories (
 CREATE TABLE favourites (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(id),
-    visible BOOLEAN DEFAULT TRUE
+    recipe_id INTEGER REFERENCES recipes(id)
 );
 
 CREATE TABLE  ratings (
@@ -42,7 +42,8 @@ CREATE TABLE  comments (
     id SERIAL PRIMARY KEY,
     comment TEXT,
     user_id INTEGER REFERENCES users(id),
-    visible BOOLEAN DEFAULT TRUE
+    visible BOOLEAN DEFAULT TRUE,
+    recipe_id INTEGER REFERENCES recipes(id)
 );
 
 INSERT INTO categories (category) VALUES ('helppo');
