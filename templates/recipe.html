@@ -2,28 +2,45 @@
 <html>
 <body>
 {% extends "layout.html" %}
-{% block title %}{{ name }}{% endblock %}
+{% block title %}{{ recipe.name }}{% endblock %}
 {% block content %}
 
-{% if session.user_id == creator_id %}
-<form action="/recipe/{{ id }}"  method="post">
-<input type="submit" value="Poista resepti">
-</form>
-{% endif %}
-
-<h2>{{ name }}</h2>
+<h2>{{ recipe.name }}</h2>
 
 <h3>Annoksia</h3>
-{{ servings }}
+{{ recipe.servings }}
 
 <h3>Ainesosat</h3>
 <pre>
-{{ ingredients }}
+{{ recipe.ingredients }}
 </pre>
 <h3>Työvaiheet</h3>
 <pre>
-{{ instructions }}
+{{ recipe.instructions }}
 </pre>
+
+<h3>Kommentit</h3>
+<hr>
+{% if not comments %}
+Ei kommentteja <br>
+{% else %}
+{% for comment in comments %}
+<strong>{{ comment.username }}</strong> <br>
+{{ comment.comment }}<br>
+<hr>
+{% endfor %}
+{% endif %}
+<br>
+{% if user_id %}
+Kommentoi:
+<form action="/recipe/{{ recipe.id }}" method="post">
+<textarea name="comment" rows="5" cols="40"></textarea> <br>
+<input type="submit" value="Lähetä">
+</form>
+{% else %}
+<a href="/login">Kirjaudu sisään</a> kommentoidaksesi
+{% endif %}
+
 {% endblock %}
 </body>
 </html>

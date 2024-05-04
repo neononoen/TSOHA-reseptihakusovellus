@@ -64,7 +64,7 @@ def profile():
     if not users.user_id():
         return redirect("/login")
     
-    return render_template("profile.html", recipes=recipes.user_recipes(users.user_id()))
+    return render_template("profile.html", recipes=recipes.user_recipes(users.user_id()), favourites=recipes.user_favourites(users.user_id()), comments=recipes.user_comments(users.user_id()))
 
 @app.route("/create_recipe", methods=["get", "post"])
 def create_recipe():
@@ -99,20 +99,12 @@ def create_recipe():
 @app.route("/recipe/<int:recipe_id>", methods=["get", "post"])
 def recipe(recipe_id):
 
-    id = recipe_id
-    if request.method == "GET":
-        recipe = recipes.recipe(recipe_id)
-        name = recipe[0]
-        servings = recipe[1]
-        ingredients = recipe[2]
-        instructions = recipe[3]
-        creator_id = recipe[4]
-
-        return render_template("recipe.html", name=name, servings=servings, ingredients=ingredients, instructions=instructions, creator_id=creator_id, id=id)
-
     if request.method == "POST":
-        recipes.remove_recipe(recipe_id)
+        comment = request.form["comment"]
+        recipes.add_comment(comment, users.user_id(), recipe_id)
 
-        return redirect("/profile")
-        
+        return redirect("/recipe/"+str(recipe_id))
     
+    if request.method == "GET":
+
+        return render_template("recipe.html", recipe = recipes.recipe(recipe_id), user_id=users.user_id(), comments=recipes.recipe_comments(recipe_id))

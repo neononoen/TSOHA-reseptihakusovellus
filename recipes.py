@@ -36,7 +36,7 @@ def user_recipes(creator_id):
 
 def recipe(recipe_id):
 
-      sql = text("SELECT name, servings, ingredients, instructions, creator_id FROM recipes WHERE id=:id")
+      sql = text("SELECT id, name, servings, ingredients, instructions, creator_id FROM recipes WHERE id=:id")
 
       result = db.session.execute(sql, {"id":recipe_id})
 
@@ -59,6 +59,44 @@ def search_recipes(search):
       results = result.fetchall()
 
       return results
+
+def user_favourites(user_id):
+
+      sql = text("SELECT recipes.id, recipes.name FROM recipes, favourites WHERE favourites.user_id=:user_id AND favourites.recipe_id=recipes.id AND recipes.visible=True")
+
+      result = db.session.execute(sql, {"user_id":user_id})
+
+      favourites = result.fetchall()
+
+      return favourites
+
+def recipe_comments(recipe_id):
+
+      sql = text("SELECT users.username, comments.comment FROM users, comments WHERE users.id=comments.user_id AND comments.recipe_id=:recipe_id")
+
+      result = db.session.execute(sql, {"recipe_id":recipe_id})
+
+      comments = result.fetchall()
+
+      return comments
+
+def add_comment(comment, user_id, recipe_id):
+
+      sql = text("INSERT INTO comments (comment, user_id, recipe_id) VALUES (:comment, ':user_id', ':recipe_id')")
+
+      db.session.execute(sql, {"comment":comment, "user_id":user_id, "recipe_id":recipe_id})
+
+      db.session.commit()
+
+def user_comments(user_id):
+
+      sql = text("SELECT recipes.id, recipes.name, comments.comment FROM recipes, comments WHERE comments.user_id=:user_id AND comments.recipe_id=recipes.id")
+
+      result = db.session.execute(sql, {"user_id":user_id})
+
+      user_comments = result.fetchall()
+
+      return user_comments
 
 
 

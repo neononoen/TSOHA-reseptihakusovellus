@@ -21,14 +21,34 @@ Ei reseptejä
 {% else %}
 {% for recipe in recipes %}
 <hr>
-<a href="/recipe/{{ recipe.id }}">{{ recipe.name }}</a>
+<a href="/recipe/{{ recipe.id }}">{{ recipe.name }}</a> 
 {% endfor %}
 <hr>
 {% endif %}
 
 <p>Suosikit</p>
 
+{% if not favourites %}
+Ei suosikkeja
+{% else %}
+{% for favourite in favourites %}
+<hr>
+<a href="/recipe/{{ favourite.id }}">{{ favourite.name }}</a>
+{% endfor %}
+<hr>
+{% endif %}
+
 <p>Kommentit</p>
 
+{% if not comments %}
+Ei kommentteja
+{% else %}
+{% for comment in comments %}
+<hr>
+<a href="/recipe/{{ comment.id }}">{{ comment.name }}</a> <br>
+"{{ comment.comment }}"
+{% endfor %}
+<hr>
+{% endif %}
 </body>
 </html>
