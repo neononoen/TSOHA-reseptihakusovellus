@@ -70,6 +70,22 @@ def user_favourites(user_id):
 
       return favourites
 
+def add_favourites(user_id, recipe_id):
+
+        sql = text("INSERT INTO favourites (user_id, recipe_id) VALUES (:user_id, :recipe_id)")
+  
+        db.session.execute(sql, {"user_id":user_id, "recipe_id":recipe_id})
+  
+        db.session.commit()
+  
+def remove_favourites(user_id, recipe_id):
+  
+        sql = text("DELETE FROM favourites WHERE user_id=:user_id AND recipe_id=:recipe_id")
+  
+        db.session.execute(sql, {"user_id":user_id, "recipe_id":recipe_id})
+  
+        db.session.commit()
+         
 def recipe_comments(recipe_id):
 
       sql = text("SELECT users.username, comments.comment FROM users, comments WHERE users.id=comments.user_id AND comments.recipe_id=:recipe_id")

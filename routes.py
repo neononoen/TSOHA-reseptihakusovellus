@@ -17,7 +17,7 @@ def results():
 
 @app.route("/login", methods=["get", "post"])
 def login():
-    
+
     if request.method == "GET":
         return render_template("login.html")
 
@@ -99,12 +99,27 @@ def create_recipe():
 @app.route("/recipe/<int:recipe_id>", methods=["get", "post"])
 def recipe(recipe_id):
 
+    for favourite in recipes.user_favourites(users.user_id()):
+        if favourite[0] == recipe_id:
+            in_favourites = True
+            break
+        else:
+            in_favourites = False               
+
     if request.method == "POST":
-        comment = request.form["comment"]
-        recipes.add_comment(comment, users.user_id(), recipe_id)
+
+        if "comment" in request.form:
+            comment = request.form["comment"]
+            recipes.add_comment(comment, users.user_id(), recipe_id)
+        
+        if "add" in request.form:
+            recipes.add_favourites(users.user_id(), recipe_id)
+        
+        if "remove" in request.form:
+            recipes.remove_favourites(users.user_id(), recipe_id)
 
         return redirect("/recipe/"+str(recipe_id))
     
     if request.method == "GET":
 
-        return render_template("recipe.html", recipe = recipes.recipe(recipe_id), user_id=users.user_id(), comments=recipes.recipe_comments(recipe_id))
+        return render_template("recipe.html", recipe=recipes.recipe(recipe_id), user_id=users.user_id(), comments=recipes.recipe_comments(recipe_id), favourites=recipes.user_favourites(users.user_id()), in_favourites=in_favourites)

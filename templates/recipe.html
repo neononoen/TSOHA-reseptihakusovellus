@@ -7,6 +7,18 @@
 
 <h2>{{ recipe.name }}</h2>
 
+{% if user_id %}
+{% if in_favourites %}
+<form action="/recipe/{{ recipe.id }}" method="post">
+<input type="submit" name="remove" value="Poista suosikeista">
+</form>
+{% else %}
+<form action="/recipe/{{ recipe.id }}" method="post">
+<input type="submit" name="add" value="Lisää suosikkeihin">
+</form>
+{% endif %}
+{% endif %}
+
 <h3>Annoksia</h3>
 {{ recipe.servings }}
 
@@ -32,10 +44,10 @@ Ei kommentteja <br>
 {% endif %}
 <br>
 {% if user_id %}
-Kommentoi:
+Kommentoi:<br>
 <form action="/recipe/{{ recipe.id }}" method="post">
 <textarea name="comment" rows="5" cols="40"></textarea> <br>
-<input type="submit" value="Lähetä">
+<input type="submit" name="comment" value="Lähetä">
 </form>
 {% else %}
 <a href="/login">Kirjaudu sisään</a> kommentoidaksesi
