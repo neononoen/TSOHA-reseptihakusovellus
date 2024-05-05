@@ -1,0 +1,64 @@
+body {
+    margin: left;
+    max-width: 45em;
+    font-family: Verdana;
+    background: lightblue;
+}
+
+nav li {
+    display: inline-block;
+    padding: .7em 1em .5em;
+    background: goldenrod;
+    border-radius: .3em;
+}
+
+.header {
+    background: goldenrod;
+    padding:  25px 50px 15px 50px;
+    font-size: 2em;
+    border-radius: .3em;
+}
+
+nav li a {
+    text-decoration: none;
+    color: darkblue;
+}
+
+h1 {
+    margin-top: 0;
+    color: darkblue;
+    text-align: left;
+}
+
+h2 {
+    margin-top: 0;
+    color: darkblue;
+}
+
+h3 {
+    margin-top: 30px;
+    color: darkblue;
+    text-align: left;
+}
+
+
+nav li:hover {
+    background-color: lightgoldenrodyellow;
+}
+
+form .button{
+    border-color: none;
+    text-align: left;
+    background: goldenrod;
+}
+
+form .button:hover{
+    background: lightgoldenrodyellow;
+    color: darkblue;
+}
+
+.recipe {
+    color: darkblue
+
+}
+

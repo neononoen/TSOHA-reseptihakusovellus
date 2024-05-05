@@ -1,14 +1,9 @@
 <!DOCTYPE html>
 <html>
 <body>
-
-<title>Uusi resepti</title>
-
-<hr>
-<a href="/">Etusivu</a> 
-<a href="/profile">Profiili</a>
-<a href="/logout">Kirjaudu ulos</a>
-<hr>
+{% extends "layout.html" %}
+{% block title %}Uusi resepti{% endblock %}
+{% block content %}
 
 <h2>Luo resepti</h2>
 <form action="/create_recipe" method="post">
@@ -32,9 +27,8 @@
 <textarea name="instructions" rows="20" cols="50"></textarea>
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 <br>
-<input type="submit" value="Luo resepti">
-
+<input type="submit" value="Luo resepti" class="button">
 </form>
-
+{% endblock %}
 </body>
 </html>

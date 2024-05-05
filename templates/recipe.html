@@ -21,36 +21,37 @@ Resepti on poistettu
 {% if in_favourites %}
 <form action="/recipe/{{ recipe.id }}" method="post">
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-<input type="submit" name="remove" value="Poista suosikeista">
+<input type="submit" name="remove" value="Poista suosikeista" class="button">
 </form>
 {% else %}
 <form action="/recipe/{{ recipe.id }}" method="post">
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-<input type="submit" name="add" value="Lisää suosikkeihin">
+<input type="submit" name="add" value="Lisää suosikkeihin" class="button">
 </form>
 {% endif %}
 {% if not rating %}
-Arvioi resepti:
+<h3>Arvioi resepti:</h3>
 <form action="/recipe/{{ recipe.id }}" method="post">
 <input type="radio" name="score" value="1"> 1
 <input type="radio" name="score" value="2"> 2
 <input type="radio" name="score" value="3"> 3
 <input type="radio" name="score" value="4"> 4
 <input type="radio" name="score" value="5"> 5
-<input type="submit" name="rating" value="Arvioi">
+<input type="submit" name="rating" value="Arvioi" class="button">
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 {% else %}
-Annoit reseptille arvosanan: <br>
-{{ rating[0] }} <br>
+<h3>Annoit reseptille arvosanan:</h3>
+{{ rating[0] }}
 {% endif %}
 {% endif %}
-
+<h3>Käyttäjien arvio reseptistä:</h3>
 {{ ratings[0] }}/5 ({{ ratings[1] }} arviota)
 
 <h3>Annoksia</h3>
+<pre>
 {{ recipe.servings }}
-
+</pre>
 <h3>Ainesosat</h3>
 <pre>
 {{ recipe.ingredients }}
@@ -64,6 +65,7 @@ Annoit reseptille arvosanan: <br>
 <hr>
 {% if not comments %}
 Ei kommentteja <br>
+<hr>
 {% else %}
 {% for comment in comments %}
 <strong>{{ comment.username }}</strong> <br>
@@ -72,7 +74,7 @@ Ei kommentteja <br>
 <form action="/recipe/{{ comment.recipe_id }}" method="post">
 <input type="hidden" value="{{ comment.id }}" name="comment_id">
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-<input type="submit" value="Poista" name="remove_comment">
+<input type="submit" value="Poista" name="remove_comment" class="button">
 </form>
 {% endif %}
 <hr>
@@ -84,7 +86,7 @@ Kommentoi:<br>
 <form action="/recipe/{{ recipe.id }}" method="post">
 <textarea name="comment" rows="5" cols="40"></textarea> <br>
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-<input type="submit" name="comment" value="Lähetä">
+<input type="submit" name="comment" value="Lähetä" class="button">
 </form>
 {% else %}
 <a href="/login">Kirjaudu sisään</a> kommentoidaksesi

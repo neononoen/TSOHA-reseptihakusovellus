@@ -5,7 +5,7 @@
 {% block title %}Etusivu{% endblock %}
 {% block content %}
 
-<a href="/results?search=">Katso kaikki reseptit</a>
+<a class="recipe" href="/results?search=">Katso kaikki reseptit</a>
 
 <form action="/results" method="get">
 <p>Hae reseptejä:</p>
@@ -19,7 +19,7 @@
 <input type="checkbox" name="category" value="6"> gluteeniton
 <input type="checkbox" name="category" value="7"> vegaaninen
 <br>
-<input type="submit" value="Hae">
+<input type="submit" value="Hae" class="button">
 </form>
 
 {% endblock %}

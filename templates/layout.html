@@ -1,13 +1,25 @@
 <!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="/static/main.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% block title %}{% endblock %}</title>
+<div class="header">
 <h1>Reseptiholvi</h1>
-<hr>
+</div>
+<nav>
+<ul>
 {% if session.user_id %}
-<a href="/">Etusivu</a> 
-<a href="/profile">Profiili</a>
-<a href="/logout">Kirjaudu ulos</a>
+<li><a href="/">Etusivu</a></li>
+<li><a href="/profile">Profiili</a></li>
+<li><a href="/logout">Kirjaudu ulos</a></li>
 {% else %}
-<a href="/login">Kirjaudu sisään</a> tai <a href="/register">luo uusi tunnus</a>
+<li><a href="/">Etusivu</a></li>
+<li><a href="/login">Kirjaudu sisään</a></li>
+<li><a href="/register">Luo uusi tunnus</a></li>
 {% endif %}
-<hr>
+</ul>
+</nav>
+<div class="content"></div>
 {% block content %}{% endblock %}
+</div>
+</html>

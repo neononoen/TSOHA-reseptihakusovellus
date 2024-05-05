@@ -1,59 +1,55 @@
 <!DOCTYPE html>
 <html>
 <body>
-
-<title>Profiili</title>
-<h1>Reseptiholvi</h1>
-<hr>
-<a href="/">Etusivu</a> 
-<a href="/profile">Profiili</a>
-<a href="/logout">Kirjaudu ulos</a>
-<hr>
+{% extends "layout.html" %}
+{% block title %}Profiili{% endblock %}
+{% block content %}
 
 <h1>Profiili</h1>
 
-<a href="/create_recipe">Lisää uusi resepti</a>
+<a class="recipe" href="/create_recipe">Lisää uusi resepti</a>
 
-<p>Reseptisi</p>
+<h3>Reseptisi</h3>
 
 {% if not recipes %}
 Ei reseptejä
 {% else %}
 {% for recipe in recipes %}
 <hr>
-<a href="/recipe/{{ recipe.id }}">{{ recipe.name }}</a>
+<a class="recipe" href="/recipe/{{ recipe.id }}">{{ recipe.name }}</a>
 <form action="/profile" method="post">
-<input type="hidden" value="{{ recipe.id }}" name="recipe_id">
+<input type="hidden" value="{{ recipe.id }}" name="recipe_id"> 
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-<input type="submit" value="Poista resepti" name="remove_recipe">
+<input type="submit" value="Poista resepti" name="remove_recipe" class="button">
 </form> 
 {% endfor %}
 <hr>
 {% endif %}
 
-<p>Suosikit</p>
+<h3>Suosikit</h3>
 
 {% if not favourites %}
 Ei suosikkeja
 {% else %}
 {% for favourite in favourites %}
 <hr>
-<a href="/recipe/{{ favourite.id }}">{{ favourite.name }}</a>
+<a class="recipe" href="/recipe/{{ favourite.id }}">{{ favourite.name }}</a>
 {% endfor %}
 <hr>
 {% endif %}
 
-<p>Kommentit</p>
+<h3>Kommentit</h3>
 
 {% if not comments %}
 Ei kommentteja
 {% else %}
 {% for comment in comments %}
 <hr>
-<a href="/recipe/{{ comment.id }}">{{ comment.name }}</a> <br>
+<a class="recipe" href="/recipe/{{ comment.id }}">{{ comment.name }}</a> <br>
 "{{ comment.comment }}"
 {% endfor %}
 <hr>
 {% endif %}
+{% endblock %}
 </body>
 </html>

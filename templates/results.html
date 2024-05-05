@@ -10,12 +10,12 @@ Ei tuloksia
 {% else %}
 {% for result in results %}
 <hr>
-<a href="/recipe/{{ result.id }}">{{ result.name }}</a>
+<a class="recipe" href="/recipe/{{ result.id }}">{{ result.name }}</a>
 {% endfor %}
 <hr>
 {% endif %}
 <br>
-<a href="/">Palaa etusivulle</a> 
+<a class="recipe" href="/">Palaa etusivulle</a> 
 {% endblock %}
 </body>
 </html>
