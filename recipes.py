@@ -140,7 +140,7 @@ def remove_comment(comment_id):
 
 def user_comments(user_id):
 
-      sql = text("SELECT comments.id, comments.user_id, recipes.id, recipes.name, comments.comment FROM recipes, comments WHERE comments.user_id=:user_id AND comments.recipe_id=recipes.id AND comments.visible=True")
+      sql = text("SELECT comments.id, comments.user_id, recipes.id, recipes.name, comments.comment FROM recipes, comments WHERE comments.user_id=:user_id AND comments.recipe_id=recipes.id AND comments.visible=True AND recipes.visible=True ")
 
       result = db.session.execute(sql, {"user_id":user_id})
 
