@@ -5,6 +5,9 @@
 {% block title %}{{ recipe.name }}{% endblock %}
 {% block content %}
 
+{% if recipe.visible == False %}
+Resepti on poistettu
+{% else %}
 <h2>{{ recipe.name }}</h2>
 {% for category in categories %}
 {% if category == categories[-1] %}
@@ -85,6 +88,7 @@ Kommentoi:<br>
 </form>
 {% else %}
 <a href="/login">Kirjaudu sisään</a> kommentoidaksesi
+{% endif %}
 {% endif %}
 
 {% endblock %}

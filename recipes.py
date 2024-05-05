@@ -36,7 +36,7 @@ def user_recipes(creator_id):
 
 def recipe(recipe_id):
 
-      sql = text("SELECT id, name, servings, ingredients, instructions, creator_id FROM recipes WHERE id=:id")
+      sql = text("SELECT id, name, servings, ingredients, instructions, creator_id, visible FROM recipes WHERE id=:id")
 
       result = db.session.execute(sql, {"id":recipe_id})
 
