@@ -114,9 +114,11 @@ def recipe(recipe_id):
               
     if request.method == "POST":
         users.check_csrf()
-        
+
         if "comment" in request.form:
             comment = request.form["comment"]
+            if comment == '':
+                return render_template("error.html", message="Kommentti on tyhjä")
             recipes.add_comment(comment, users.user_id(), recipe_id)
         
         if "add" in request.form:
