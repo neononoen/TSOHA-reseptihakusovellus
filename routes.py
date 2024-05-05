@@ -124,6 +124,10 @@ def recipe(recipe_id):
             comment_id = request.form["comment_id"]
             recipes.remove_comment(comment_id)
 
+        if "rating" in request.form:
+            score = request.form["score"]
+            recipes.add_rating(score, users.user_id(), recipe_id)
+
         return redirect("/recipe/"+str(recipe_id))
     
     if request.method == "GET": 
@@ -134,5 +138,8 @@ def recipe(recipe_id):
             if favourite[0] == recipe_id:
                 in_favourites = True
                 break
+        
+        rating = recipes.user_rating(users.user_id(), recipe_id)
+        ratings = recipes.recipe_ratings(recipe_id)
 
-        return render_template("recipe.html", recipe=recipes.recipe(recipe_id), user_id=users.user_id(), comments=recipes.recipe_comments(recipe_id), favourites=recipes.user_favourites(users.user_id()), in_favourites=in_favourites)
+        return render_template("recipe.html", recipe=recipes.recipe(recipe_id), user_id=users.user_id(), comments=recipes.recipe_comments(recipe_id), favourites=recipes.user_favourites(users.user_id()), in_favourites=in_favourites, ratings=ratings, rating=rating)

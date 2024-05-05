@@ -17,7 +17,23 @@
 <input type="submit" name="add" value="Lisää suosikkeihin">
 </form>
 {% endif %}
+{% if not rating %}
+Arvioi resepti:
+<form action="/recipe/{{ recipe.id }}" method="post">
+<input type="radio" name="score" value="1"> 1
+<input type="radio" name="score" value="2"> 2
+<input type="radio" name="score" value="3"> 3
+<input type="radio" name="score" value="4"> 4
+<input type="radio" name="score" value="5"> 5
+<input type="submit" name="rating" value="Arvioi">
+</form>
+{% else %}
+Annoit reseptille arvosanan: <br>
+{{ rating[0] }} <br>
 {% endif %}
+{% endif %}
+
+{{ ratings[0] }}/5 ({{ ratings[1] }} arviota)
 
 <h3>Annoksia</h3>
 {{ recipe.servings }}

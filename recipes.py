@@ -123,5 +123,30 @@ def user_comments(user_id):
 
       return user_comments
 
+def recipe_ratings(recipe_id):
 
+      sql = text("SELECT COALESCE(AVG(score)::NUMERIC(10,2), 0), COALESCE(COUNT(recipe_id), 0) FROM ratings WHERE recipe_id=:recipe_id")
 
+      result = db.session.execute(sql, {"recipe_id":recipe_id})
+
+      ratings = result.fetchone()
+
+      return ratings
+
+def add_rating(score, user_id, recipe_id):
+
+      sql = text("INSERT INTO ratings(score, user_id, recipe_id) VALUES (:score, :user_id, :recipe_id)")
+
+      db.session.execute(sql, {"score":score, "user_id":user_id, "recipe_id":recipe_id})
+
+      db.session.commit()
+
+def user_rating(user_id, recipe_id):
+
+      sql = text("SELECT score FROM ratings WHERE user_id=:user_id AND recipe_id=:recipe_id")
+
+      result = db.session.execute(sql, {"user_id":user_id, "recipe_id":recipe_id})
+
+      rating = result.fetchone()
+
+      return rating
