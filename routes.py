@@ -66,6 +66,7 @@ def profile():
         return redirect("/login")
     
     if request.method == "POST":
+        users.check_csrf()
 
         if "remove_recipe" in request.form:
             recipe_id = request.form["recipe_id"]
@@ -86,6 +87,8 @@ def create_recipe():
         return render_template("create_recipe.html")
     
     if request.method == "POST":
+        users.check_csrf()
+
         name = request.form["name"]
         creator_id = users.user_id()
         servings = request.form["servings"]
@@ -110,7 +113,8 @@ def create_recipe():
 def recipe(recipe_id):
               
     if request.method == "POST":
-
+        users.check_csrf()
+        
         if "comment" in request.form:
             comment = request.form["comment"]
             recipes.add_comment(comment, users.user_id(), recipe_id)

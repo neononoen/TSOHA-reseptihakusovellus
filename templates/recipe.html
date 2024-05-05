@@ -17,10 +17,12 @@
 {% if user_id %}
 {% if in_favourites %}
 <form action="/recipe/{{ recipe.id }}" method="post">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 <input type="submit" name="remove" value="Poista suosikeista">
 </form>
 {% else %}
 <form action="/recipe/{{ recipe.id }}" method="post">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 <input type="submit" name="add" value="Lisää suosikkeihin">
 </form>
 {% endif %}
@@ -33,6 +35,7 @@ Arvioi resepti:
 <input type="radio" name="score" value="4"> 4
 <input type="radio" name="score" value="5"> 5
 <input type="submit" name="rating" value="Arvioi">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 {% else %}
 Annoit reseptille arvosanan: <br>
@@ -65,6 +68,7 @@ Ei kommentteja <br>
 {% if comment.user_id == user_id %}
 <form action="/recipe/{{ comment.recipe_id }}" method="post">
 <input type="hidden" value="{{ comment.id }}" name="comment_id">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 <input type="submit" value="Poista" name="remove_comment">
 </form>
 {% endif %}
@@ -76,6 +80,7 @@ Ei kommentteja <br>
 Kommentoi:<br>
 <form action="/recipe/{{ recipe.id }}" method="post">
 <textarea name="comment" rows="5" cols="40"></textarea> <br>
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 <input type="submit" name="comment" value="Lähetä">
 </form>
 {% else %}

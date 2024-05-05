@@ -30,6 +30,7 @@
 <textarea name="ingredients" rows="20" cols="50"></textarea>
 <p>Työvaiheet:</p>
 <textarea name="instructions" rows="20" cols="50"></textarea>
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 <br>
 <input type="submit" value="Luo resepti">
 
