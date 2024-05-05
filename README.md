@@ -1,21 +1,19 @@
-**Reseptihakusovellus**
+**Reseptiholvi-reseptihakusovellus**
 
-Sovelluksen käyttäjät voivat lisätä reseptejä ja arvostella muiden reseptejä.
+Reseptiholvin käyttäjät voivat lisätä reseptejä, kommentoida reseptejä sekä antaa reseptille arvosanan. Reseptin voi myös lisätä suosikiksi, jolloin sen löytää helposti omasta profiilista. Reseptejä voi hakea ja katsella ilman sisäänkirjautumista, muut ominaisuudet vaativat sisäänkirjautumisen.
 
-Sovelluksen ominaisuudet:
+Sovelluksen käynnistysohjeet:
 
-- Käyttäjä voi kirjautua sisään ja ulos, tai luoda uuden tunnuksen.
-- Käyttäjä voi lisätä reseptin ja antaa sille yhden tai useamman kategorian.
-- Käyttäjä voi arvostella reseptin ja kommentoida reseptiä, muut käyttäjät voivat nähdä reseptin kommentit ja arvosanan.
-- Reseptin tekijä voi vastata kommentteihin.
-- Reseptejä voi hakea eri kategorioista.
-- Käyttäjä voi muokata tai poistaa oman reseptinsä tai kommenttinsa.
-- Käyttäjä voi lisätä reseptin suosikkeihin.
-
-Nykytilanne:
-
-- Käyttäjä voi kirjautua sisään ja ulos ja luoda tunnuksen
-- Käyttäjä voi lisätä reseptin ja antaa sille kategoriat
-- Käyttäjä voi avata oman profiilisivun
-- Suosikkien lisääminen, kommentointi tai reseptien haku ei onnistu vielä
-- Reseptisivu ei vielä näytä itse reseptiä
+1. Kloonaa tämä repositorio koneellesi.
+2. Siirry repositorion juurikansioon.
+3. Luo kansioon .env-tiedosto, ja määritä tiedoston sisältö seuraavanlaiseksi:
+    DATABASE_URL=<tietokannan-paikallinen-osoite>
+    SECRET_KEY=<salainen-avain>
+4. Aktivoi virtuaaliympäristö ja asenna sovelluksen riippuvuudet seuraavilla komennoilla:
+    python3 -m venv venv
+    source venv/bin/activate
+    pip install -r ./requirements.txt
+5. Määritä tietokanta komennolla:
+    psql < schema.sql
+6. Käynnistä sovellus komennolla:
+    flask run
