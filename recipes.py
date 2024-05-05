@@ -44,21 +44,46 @@ def recipe(recipe_id):
 
       return recipe
 
+def categories(recipe_id):
+
+      sql = text("SELECT categories.category FROM recipe_categories, categories WHERE recipe_categories.recipe_id=:recipe_id AND recipe_categories.category_id=categories.id")
+
+      result = db.session.execute(sql, {"recipe_id":recipe_id})
+
+      categories = result.fetchall()
+
+      return categories
+
 def remove_recipe(recipe_id):
       
       sql = text("UPDATE recipes SET visible=FALSE WHERE id=:id")
       db.session.execute(sql, {"id":recipe_id})
       db.session.commit()
 
-def search_recipes(search):
+def search_recipes(search, categories):
 
-      sql = text("SELECT id, name FROM recipes WHERE visible=:visible AND name ILIKE :search")
+      sql = text("SELECT id, name FROM recipes WHERE visible=True AND name ILIKE :search")
 
-      result = db.session.execute(sql, {"visible":True, "search":"%"+search+"%"})
+      recipes = db.session.execute(sql, {"search":"%"+search+"%"}).fetchall()
 
-      results = result.fetchall()
+      if categories == []:
 
-      return results
+            return recipes
+      
+      else:
+            results= []
+            for recipe in recipes:
+                  for category_id in categories:
+                  
+                        sql = text("SELECT recipes.id, recipes.name FROM recipes, recipe_categories WHERE recipe_categories.category_id=:category_id AND recipes.id=:recipe_id AND recipe_categories.recipe_id=recipes.id")
+
+                        result = db.session.execute(sql, {"category_id":category_id, "recipe_id":recipe[0]}).fetchone()
+
+                        if result == None:
+                              break
+                        else:
+                              results.append(result)
+            return results
 
 def user_favourites(user_id):
 

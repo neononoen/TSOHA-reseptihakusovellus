@@ -5,9 +5,20 @@
 {% block title %}Etusivu{% endblock %}
 {% block content %}
 
+<a href="/results?search=">Katso kaikki reseptit</a>
+
 <form action="/results" method="get">
 <p>Hae reseptejä:</p>
 <input type="text" name="search">
+<br>
+<input type="checkbox" name="category" value="1"> helppo
+<input type="checkbox" name="category" value="2"> keskitaso
+<input type="checkbox" name="category" value="3"> haastava <br>
+<input type="checkbox" name="category" value="4"> suolaiset
+<input type="checkbox" name="category" value="5"> makeat <br>
+<input type="checkbox" name="category" value="6"> gluteeniton
+<input type="checkbox" name="category" value="7"> vegaaninen
+<br>
 <input type="submit" value="Hae">
 </form>
 

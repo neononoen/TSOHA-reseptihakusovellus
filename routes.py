@@ -11,9 +11,10 @@ def index():
 @app.route("/results")
 def results():
 
+    categories = request.args.getlist("category")
     search = request.args["search"]
 
-    return render_template("results.html", results=recipes.search_recipes(search))
+    return render_template("results.html", results=recipes.search_recipes(search, categories))
 
 @app.route("/login", methods=["get", "post"])
 def login():
@@ -138,8 +139,8 @@ def recipe(recipe_id):
             if favourite[0] == recipe_id:
                 in_favourites = True
                 break
-        
+        categories = recipes.categories(recipe_id)
         rating = recipes.user_rating(users.user_id(), recipe_id)
         ratings = recipes.recipe_ratings(recipe_id)
 
-        return render_template("recipe.html", recipe=recipes.recipe(recipe_id), user_id=users.user_id(), comments=recipes.recipe_comments(recipe_id), favourites=recipes.user_favourites(users.user_id()), in_favourites=in_favourites, ratings=ratings, rating=rating)
+        return render_template("recipe.html", recipe=recipes.recipe(recipe_id), user_id=users.user_id(), comments=recipes.recipe_comments(recipe_id), favourites=recipes.user_favourites(users.user_id()), in_favourites=in_favourites, ratings=ratings, rating=rating, categories=categories)
