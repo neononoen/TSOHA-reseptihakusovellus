@@ -9,14 +9,6 @@
 Resepti on poistettu
 {% else %}
 <h2>{{ recipe.name }}</h2>
-{% for category in categories %}
-{% if category == categories[-1] %}
-{{ category[0] }}
-{% else %}
-{{ category[0] }},
-{% endif %}
-{% endfor %}
-<br>
 {% if user_id %}
 {% if in_favourites %}
 <form action="/recipe/{{ recipe.id }}" method="post">
@@ -28,7 +20,18 @@ Resepti on poistettu
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 <input type="submit" name="add" value="Lisää suosikkeihin" class="button">
 </form>
+
 {% endif %}
+{% endif %}
+{% for category in categories %}
+{% if category == categories[-1] %}
+{{ category[0] }}
+{% else %}
+{{ category[0] }},
+{% endif %}
+{% endfor %}
+
+{% if user_id %}
 {% if not rating %}
 <h3>Arvioi resepti:</h3>
 <form action="/recipe/{{ recipe.id }}" method="post">

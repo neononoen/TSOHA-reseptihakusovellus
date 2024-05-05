@@ -58,7 +58,19 @@ form .button:hover{
 }
 
 .recipe {
-    color: darkblue
-
+    color: darkblue;
+    text-decoration: none;
 }
 
+.button {
+    text-decoration: none;
+    color: darkblue;
+    border-color: none;
+    text-align: left;
+    background: goldenrod;
+}
+
+.button:hover{
+    background: lightgoldenrodyellow;
+    color: darkblue;
+}
