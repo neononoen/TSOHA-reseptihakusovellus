@@ -21,7 +21,11 @@ Ei reseptejä
 {% else %}
 {% for recipe in recipes %}
 <hr>
-<a href="/recipe/{{ recipe.id }}">{{ recipe.name }}</a> 
+<a href="/recipe/{{ recipe.id }}">{{ recipe.name }}</a>
+<form action="/profile" method="post">
+<input type="hidden" value="{{ recipe.id }}" name="recipe_id">
+<input type="submit" value="Poista resepti" name="remove_recipe">
+</form> 
 {% endfor %}
 <hr>
 {% endif %}

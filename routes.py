@@ -58,13 +58,22 @@ def logout():
     users.logout()
     return redirect("/")
 
-@app.route("/profile", methods=["get"])
+@app.route("/profile", methods=["get", "post"])
 def profile():
 
     if not users.user_id():
         return redirect("/login")
     
-    return render_template("profile.html", recipes=recipes.user_recipes(users.user_id()), favourites=recipes.user_favourites(users.user_id()), comments=recipes.user_comments(users.user_id()))
+    if request.method == "POST":
+
+        if "remove_recipe" in request.form:
+            recipe_id = request.form["recipe_id"]
+            recipes.remove_recipe(recipe_id)
+
+        return redirect("/profile")
+    if request.method == "GET":       
+    
+        return render_template("profile.html", recipes=recipes.user_recipes(users.user_id()), favourites=recipes.user_favourites(users.user_id()), comments=recipes.user_comments(users.user_id()))
 
 @app.route("/create_recipe", methods=["get", "post"])
 def create_recipe():
@@ -98,14 +107,7 @@ def create_recipe():
     
 @app.route("/recipe/<int:recipe_id>", methods=["get", "post"])
 def recipe(recipe_id):
-
-    for favourite in recipes.user_favourites(users.user_id()):
-        if favourite[0] == recipe_id:
-            in_favourites = True
-            break
-        else:
-            in_favourites = False               
-
+              
     if request.method == "POST":
 
         if "comment" in request.form:
@@ -118,8 +120,19 @@ def recipe(recipe_id):
         if "remove" in request.form:
             recipes.remove_favourites(users.user_id(), recipe_id)
 
+        if "remove_comment" in request.form:
+            comment_id = request.form["comment_id"]
+            recipes.remove_comment(comment_id)
+
         return redirect("/recipe/"+str(recipe_id))
     
-    if request.method == "GET":
+    if request.method == "GET": 
+
+        in_favourites = False
+
+        for favourite in recipes.user_favourites(users.user_id()):
+            if favourite[0] == recipe_id:
+                in_favourites = True
+                break
 
         return render_template("recipe.html", recipe=recipes.recipe(recipe_id), user_id=users.user_id(), comments=recipes.recipe_comments(recipe_id), favourites=recipes.user_favourites(users.user_id()), in_favourites=in_favourites)

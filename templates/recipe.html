@@ -39,6 +39,12 @@ Ei kommentteja <br>
 {% for comment in comments %}
 <strong>{{ comment.username }}</strong> <br>
 {{ comment.comment }}<br>
+{% if comment.user_id == user_id %}
+<form action="/recipe/{{ comment.recipe_id }}" method="post">
+<input type="hidden" value="{{ comment.id }}" name="comment_id">
+<input type="submit" value="Poista" name="remove_comment">
+</form>
+{% endif %}
 <hr>
 {% endfor %}
 {% endif %}

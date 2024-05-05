@@ -88,7 +88,7 @@ def remove_favourites(user_id, recipe_id):
          
 def recipe_comments(recipe_id):
 
-      sql = text("SELECT users.username, comments.comment FROM users, comments WHERE users.id=comments.user_id AND comments.recipe_id=:recipe_id")
+      sql = text("SELECT comments.id, comments.user_id, users.username, comments.comment, comments.recipe_id FROM users, comments WHERE users.id=comments.user_id AND comments.recipe_id=:recipe_id AND visible=True")
 
       result = db.session.execute(sql, {"recipe_id":recipe_id})
 
@@ -104,9 +104,18 @@ def add_comment(comment, user_id, recipe_id):
 
       db.session.commit()
 
+def remove_comment(comment_id):
+
+      sql = text("UPDATE comments SET visible=False WHERE id=:id")
+
+      db.session.execute(sql, {"id":comment_id})
+
+      db.session.commit()
+
+
 def user_comments(user_id):
 
-      sql = text("SELECT recipes.id, recipes.name, comments.comment FROM recipes, comments WHERE comments.user_id=:user_id AND comments.recipe_id=recipes.id")
+      sql = text("SELECT comments.id, comments.user_id, recipes.id, recipes.name, comments.comment FROM recipes, comments WHERE comments.user_id=:user_id AND comments.recipe_id=recipes.id AND comments.visible=True")
 
       result = db.session.execute(sql, {"user_id":user_id})
 
